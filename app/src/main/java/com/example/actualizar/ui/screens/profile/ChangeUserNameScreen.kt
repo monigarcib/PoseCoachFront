@@ -1,5 +1,6 @@
 package com.example.actualizar.ui.screens.profile
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -9,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -104,12 +106,17 @@ fun ChangeUsernameScreen(navController: NavController) {
             )
 
             Spacer(Modifier.height(30.dp))
+            val ctx = LocalContext.current
 
             UpdateButton(
                 text = "ACTUALIZAR",
                 enabled = username.isNotBlank(),
                 modifier = Modifier.fillMaxWidth()
-            ) { /* TODO */ }
+            ) {
+
+                Toast.makeText(ctx, "¡Usuario actualizado!", Toast.LENGTH_SHORT).show()
+                // Más adelante aquí llamarás tu lógica de "actualizar datos"
+            }
         }
     }
 }
