@@ -37,17 +37,17 @@ fun UpdateButton(
         modifier = modifier
             .fillMaxWidth()
             .height(48.dp)
-            .clip(shape) // asegura el hitbox y la forma
+            .clip(shape)
             .background(bg)
             .semantics { role = Role.Button }
-            .clickable(                     // sin ripple, pero clickeable
+            .clickable(
                 enabled = enabled,
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
             ) { onClick() },
         contentAlignment = Alignment.Center
     ) {
-        // Pastillas verdes laterales
+
         Box(
             modifier = Modifier
                 .align(Alignment.CenterStart)
@@ -63,7 +63,7 @@ fun UpdateButton(
                 .background(green, RoundedCornerShape(8.dp))
         )
 
-        // Texto (mantiene tipografía/estilo del mockup)
+
         Text(
             text = text,
             color = fg,
