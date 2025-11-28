@@ -1,77 +1,82 @@
 package com.example.actualizar.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.draw.clip
 
 @Composable
 fun UpdateButton(
-    text: String = "ACTUALIZAR",
-    enabled: Boolean = true,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    enabled: Boolean = true,
+    text: String = "ACTUALIZAR",
 ) {
-    val bg = if (enabled) Color(0xFFEDEDED) else Color(0xFF2B2B2B)
-    val fg = if (enabled) Color.Black else Color(0xFF8A8A8A)
-    val green = Color(0xFF1D5E21)
-    val shape = RoundedCornerShape(12.dp)
-
-    Box(
+    Button(
+        onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .height(48.dp)
-            .clip(shape)
-            .background(bg)
-            .semantics { role = Role.Button }
-            .clickable(
-                enabled = enabled,
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            ) { onClick() },
-        contentAlignment = Alignment.Center
+            .height(48.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFFEDEDED),
+            contentColor = Color.Black,
+            disabledContainerColor = Color(0xFF2B2B2B),
+            disabledContentColor = Color(0xFF8A8A8A)
+        ),
+        shape = RoundedCornerShape(12.dp),
+        enabled = enabled,
     ) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            // Borde verde izquierdo
+            Box(
+                modifier = Modifier
+                    .width(4.dp)
+                    .height(22.dp)
+                    .background(
+                        color = Color(0xFF298A2F),
+                        shape = RoundedCornerShape(50.dp)
+                    )
+            )
 
-        Box(
-            modifier = Modifier
-                .align(Alignment.CenterStart)
-                .padding(start = 10.dp)
-                .size(width = 8.dp, height = 22.dp)
-                .background(green, RoundedCornerShape(8.dp))
-        )
-        Box(
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .padding(end = 10.dp)
-                .size(width = 8.dp, height = 22.dp)
-                .background(green, RoundedCornerShape(8.dp))
-        )
+            // Texto centrado
+            Text(
+                text = text,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 8.dp),
+                color = Color.Black,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.sp
+                )
+            )
 
-
-        Text(
-            text = text,
-            color = fg,
-            style = MaterialTheme.typography.bodyMedium.copy(
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 1.sp
-            ),
-            textAlign = TextAlign.Center
-        )
+            // Borde verde derecho
+            Box(
+                modifier = Modifier
+                    .width(4.dp)
+                    .height(22.dp)
+                    .background(
+                        color = Color(0xFF1D5E21),
+                        shape = RoundedCornerShape(50.dp)
+                    )
+            )
+        }
     }
 }

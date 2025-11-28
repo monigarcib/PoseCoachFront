@@ -1,5 +1,6 @@
 package com.example.actualizar.ui.screens.profile
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -118,24 +120,33 @@ fun DeleteAccountConfirmScreen(
 
                     Spacer(Modifier.height(18.dp))
 
+                    val ctx = LocalContext.current
+
                     UpdateButton(
-                        text = "ELIMINAR",
-                        enabled = canDelete,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        onConfirmDelete(typed)
-                        navController.popBackStack()
-                    }
+                        onClick = {
+                            Toast.makeText(ctx, "Seguro que desea eleminar la cuenta", Toast.LENGTH_SHORT).show()
+                            // navController.popBackStack()
+                        },
+                        text = "ACTUALIZAR",
+                        enabled = true,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 5.dp)
+                    )
 
                     Spacer(Modifier.height(12.dp))
 
                     UpdateButton(
-                        text = "CANCELAR",
+                        onClick = {
+                            Toast.makeText(ctx, "¡Cuenta eliminada!", Toast.LENGTH_SHORT).show()
+                            // navController.popBackStack()
+                        },
+                        text = "ACTUALIZAR",
                         enabled = true,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        navController.popBackStack()
-                    }
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 5.dp)
+                    )
                 }
             }
         }

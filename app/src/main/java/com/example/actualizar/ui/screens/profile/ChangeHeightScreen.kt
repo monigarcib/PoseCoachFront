@@ -1,6 +1,7 @@
 package com.example.actualizar.ui.screens.profile
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,6 +34,7 @@ import com.example.actualizar.ui.components.UpdateButton
 import kotlin.math.abs
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 
 @SuppressLint("Range")
 @OptIn(ExperimentalFoundationApi::class)
@@ -151,16 +153,19 @@ fun ChangeHeightScreen(navController: NavController) {
 
             Spacer(Modifier.weight(1f))
 
+            val ctx = LocalContext.current
+
             UpdateButton(
+                onClick = {
+                    Toast.makeText(ctx, "¡Altura actualizada!", Toast.LENGTH_SHORT).show()
+                    // navController.popBackStack()
+                },
                 text = "ACTUALIZAR",
                 enabled = true,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .padding(bottom = 20.dp)
-            ) {
-                // TODO: enviar `selected` al backend
-            }
+                    .padding(bottom = 5.dp)
+            )
         }
     }
 }

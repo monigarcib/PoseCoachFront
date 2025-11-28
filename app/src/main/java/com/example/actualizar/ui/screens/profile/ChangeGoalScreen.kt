@@ -1,6 +1,7 @@
 package com.example.actualizar.ui.screens.profile
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,6 +23,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -136,16 +138,19 @@ fun ChangeGoalScreen(navController: NavController) {
                 }
             }
 
+            val ctx = LocalContext.current
+
             UpdateButton(
+                onClick = {
+                    Toast.makeText(ctx, "¡Meta actualizada!", Toast.LENGTH_SHORT).show()
+                    // navController.popBackStack()
+                },
                 text = "ACTUALIZAR",
-                enabled = selected != null,
+                enabled = true,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .navigationBarsPadding()
-                    .padding(bottom = 90.dp)
-            ) {
-                // TODO: envía 'selected' a tu VM / use case
-            }
+                    .padding(bottom = 5.dp)
+            )
         }
     }
 }

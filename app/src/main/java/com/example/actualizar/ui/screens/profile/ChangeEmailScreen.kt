@@ -1,14 +1,18 @@
 package com.example.actualizar.ui.screens.profile
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -22,6 +26,7 @@ import com.example.actualizar.ui.theme.AppGray
 @Composable
 fun ChangeEmailScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
+    val ctx = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -102,13 +107,19 @@ fun ChangeEmailScreen(navController: NavController) {
                     .height(52.dp)
             )
 
-            Spacer(Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             UpdateButton(
+                onClick = {
+                    Toast.makeText(ctx, "¡Email actualizado!", Toast.LENGTH_SHORT).show()
+                    // navController.popBackStack()
+                },
                 text = "ACTUALIZAR",
-                enabled = email.isNotBlank(),
-                modifier = Modifier.fillMaxWidth()
-            ) { /* TODO */ }
+                enabled = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 5.dp)
+            )
         }
     }
 }

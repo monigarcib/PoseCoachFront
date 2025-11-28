@@ -1,5 +1,6 @@
 package com.example.actualizar.ui.screens.profile
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
@@ -29,11 +30,13 @@ import java.util.Calendar
 import kotlin.math.abs
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ChangeBirthdayScreen(navController: NavController) {
     val cal = remember { Calendar.getInstance() }
+    val ctx = LocalContext.current
 
     // datos
     val years = remember { (1950..cal.get(Calendar.YEAR)).toList() }
@@ -166,17 +169,17 @@ fun ChangeBirthdayScreen(navController: NavController) {
             )
         }
 
-        // Botón más arriba (no pegado al borde inferior)
         UpdateButton(
+            onClick = {
+                Toast.makeText(ctx, "¡Fecha de nacimiento actualizada!", Toast.LENGTH_SHORT).show()
+                // navController.popBackStack()
+            },
             text = "ACTUALIZAR",
             enabled = true,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 5.dp)   // sube/baja el botón aquí
-                .navigationBarsPadding()
-        ) {
-            // TODO: usa selectedYear/selectedMonth/selectedDay
-        }
+                .padding(bottom = 5.dp)
+        )
     }
 }
 

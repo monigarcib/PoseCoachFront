@@ -109,14 +109,16 @@ fun ChangeUsernameScreen(navController: NavController) {
             val ctx = LocalContext.current
 
             UpdateButton(
+                onClick = {
+                    Toast.makeText(ctx, "¡Usuario actualizado!", Toast.LENGTH_SHORT).show()
+                    // navController.popBackStack()
+                },
                 text = "ACTUALIZAR",
-                enabled = username.isNotBlank(),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-
-                Toast.makeText(ctx, "¡Usuario actualizado!", Toast.LENGTH_SHORT).show()
-                // Más adelante aquí llamarás tu lógica de "actualizar datos"
-            }
+                enabled = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 5.dp)
+            )
         }
     }
 }
